@@ -1,5 +1,7 @@
-package dev.joaorooliveira.catalogo_filmes.domain.filme.dto;
+package dev.joaorooliveira.catalogo_filmes.domain.filme;
 
+import dev.joaorooliveira.catalogo_filmes.domain.diretor.Diretor;
+import dev.joaorooliveira.catalogo_filmes.domain.filme.enums.GeneroTipo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
