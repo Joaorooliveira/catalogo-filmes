@@ -52,4 +52,10 @@ public class FilmeController {
     public ResponseEntity<FilmeResponseDTO> atualizar(@PathVariable Long id, FilmeAtualizarDTO filmeAtualizarDTO){
         return ResponseEntity.ok(filmeService.atualizarFilme(id,filmeAtualizarDTO));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        filmeService.deletarFilme(id);
+        return ResponseEntity.ok().build();
+    }
 }
