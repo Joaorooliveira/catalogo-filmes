@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table(name = "lista")
@@ -42,5 +43,5 @@ public class Lista {
             joinColumns = @JoinColumn(name = "lista_id"),
             inverseJoinColumns = @JoinColumn(name = "filme_id")
     )
-    private List<Filme> filmes;
+    private List<Filme> filmes = new ArrayList<>();
 }
