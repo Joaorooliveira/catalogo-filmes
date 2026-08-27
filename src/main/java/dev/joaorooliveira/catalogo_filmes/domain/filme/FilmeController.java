@@ -41,4 +41,9 @@ public class FilmeController {
                                                          FilmeFiltroRequestDTO filtro) {
         return ResponseEntity.ok(filmeService.buscarFilmes(pageable, filtro));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<FilmeResponseDTO> buscarFilmePorId(@PathVariable Long id) {
+        return ResponseEntity.ok(filmeService.buscarFilmePorId(id));
+    }
 }
