@@ -1,5 +1,6 @@
 package dev.joaorooliveira.catalogo_filmes.domain.filme.dto;
 
+import dev.joaorooliveira.catalogo_filmes.domain.diretor.Diretor;
 import dev.joaorooliveira.catalogo_filmes.domain.filme.Filme;
 import dev.joaorooliveira.catalogo_filmes.domain.filme.enums.GeneroTipo;
 import jakarta.validation.constraints.NotBlank;
@@ -29,13 +30,13 @@ public record FilmeRequestDTO(
         Long diretorId
 ) {
 
-    public Filme toEntity() {
+    public Filme toEntity(Diretor diretor) {
         Filme filme = new Filme();
-        preencher(filme);
+        preencher(filme,diretor);
         return filme;
     }
 
-    public void preencher(Filme filme) {
+    public void preencher(Filme filme,Diretor diretor) {
         filme.setNome(this.nome);
         filme.setDescricao(this.descricao);
         filme.setGenero(this.genero);
@@ -43,5 +44,6 @@ public record FilmeRequestDTO(
         filme.setAnoLancamento(this.anoLancamento);
         filme.setAssistido(this.assistido);
         filme.setFavorito(this.favorito);
+        filme.setDiretor(diretor);
     }
 }
