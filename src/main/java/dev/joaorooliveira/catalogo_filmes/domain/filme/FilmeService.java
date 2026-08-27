@@ -2,6 +2,7 @@ package dev.joaorooliveira.catalogo_filmes.domain.filme;
 
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.Diretor;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.DiretorRepository;
+import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeAtualizarDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeFiltroRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeResponseDTO;
@@ -48,5 +49,21 @@ public class FilmeService {
                 ()-> new EntidadeNaoEncontradaException("Filme não encontrado"));
         filmeRepository.delete(filme);
     }
+
+    @Transactional
+    public FilmeResponseDTO atualizarFilme(Long id,FilmeAtualizarDTO dto){
+        Filme filme = filmeRepository.findById(id).orElseThrow(
+                ()-> new EntidadeNaoEncontradaException("Filme não encontrado"));
+        dto.preencher(filme);
+
+        if(dto.diretorId()!= null){
+            Diretor diretor = diretorRepository.findById(dto.diretorId()).orElseThrow(
+                    ()-> new EntidadeNaoEncontradaException("Diretor nao encontrado"));
+            filme.setDiretor(diretor);
+        }
+        return FilmeResponseDTO.fromEntity(filmeRepository.save(filme));
+    }
+
+
 
 }
