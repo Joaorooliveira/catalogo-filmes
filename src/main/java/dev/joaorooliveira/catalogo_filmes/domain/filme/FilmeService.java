@@ -36,5 +36,17 @@ public class FilmeService {
                 .map(FilmeResponseDTO::fromEntity);
     }
 
+    public FilmeResponseDTO buscarFilmePorId(Long id) {
+        Filme filme = filmeRepository.findById(id).orElseThrow(
+                ()-> new EntidadeNaoEncontradaException("Filme não encontrado"));
+        return FilmeResponseDTO.fromEntity(filme);
+    }
+
+    @Transactional
+    public void deletarFilme(Long id){
+        Filme filme = filmeRepository.findById(id).orElseThrow(
+                ()-> new EntidadeNaoEncontradaException("Filme não encontrado"));
+        filmeRepository.delete(filme);
+    }
 
 }
