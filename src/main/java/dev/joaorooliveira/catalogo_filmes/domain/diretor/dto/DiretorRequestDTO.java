@@ -1,7 +1,6 @@
 package dev.joaorooliveira.catalogo_filmes.domain.diretor.dto;
 
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.Diretor;
-import dev.joaorooliveira.catalogo_filmes.domain.filme.Filme;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 
