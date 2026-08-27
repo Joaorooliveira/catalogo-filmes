@@ -1,5 +1,6 @@
 package dev.joaorooliveira.catalogo_filmes.domain.filme;
 
+import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeAtualizarDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeFiltroRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeResponseDTO;
@@ -45,5 +46,10 @@ public class FilmeController {
     @GetMapping("/{id}")
     public ResponseEntity<FilmeResponseDTO> buscarFilmePorId(@PathVariable Long id) {
         return ResponseEntity.ok(filmeService.buscarFilmePorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FilmeResponseDTO> atualizar(@PathVariable Long id, FilmeAtualizarDTO filmeAtualizarDTO){
+        return ResponseEntity.ok(filmeService.atualizarFilme(id,filmeAtualizarDTO));
     }
 }
