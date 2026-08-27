@@ -1,4 +1,4 @@
-package dev.joaorooliveira.catalogo_filmes.infra;
+package dev.joaorooliveira.catalogo_filmes.infra.exception;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

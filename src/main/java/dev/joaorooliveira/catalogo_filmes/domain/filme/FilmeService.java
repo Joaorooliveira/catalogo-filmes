@@ -4,7 +4,7 @@ import dev.joaorooliveira.catalogo_filmes.domain.diretor.Diretor;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.DiretorRepository;
 import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeResponseDTO;
-import dev.joaorooliveira.catalogo_filmes.infra.EntidadeNaoEncontradaException;
+import dev.joaorooliveira.catalogo_filmes.infra.exception.EntidadeNaoEncontradaException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

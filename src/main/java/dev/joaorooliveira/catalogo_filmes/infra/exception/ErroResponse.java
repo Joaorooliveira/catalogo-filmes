@@ -1,4 +1,4 @@
-package dev.joaorooliveira.catalogo_filmes.infra;
+package dev.joaorooliveira.catalogo_filmes.infra.exception;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -11,6 +11,7 @@ public record FilmeFiltroRequestDTO(
         LocalDate anoLancamento,
         Integer avaliacao,
         Boolean assistido,
-        Boolean favorito
+        Boolean favorito,
+        Long diretorId
 ) {
 }

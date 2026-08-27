@@ -1,4 +1,4 @@
-package dev.joaorooliveira.catalogo_filmes.infra;
+package dev.joaorooliveira.catalogo_filmes.infra.exception;
 
 public class RegraNegocioException extends RuntimeException{
 
