@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 public record FilmeResponseDTO(
     String nome,
+    Long id,
     String descricao,
     GeneroTipo genero,
     LocalDate anoLancamento,
@@ -19,6 +20,7 @@ public record FilmeResponseDTO(
     public static FilmeResponseDTO fromEntity(Filme filme) {
         return new FilmeResponseDTO(
                 filme.getNome(),
+                filme.getId(),
                 filme.getDescricao(),
                 filme.getGenero(),
                 filme.getAnoLancamento(),
