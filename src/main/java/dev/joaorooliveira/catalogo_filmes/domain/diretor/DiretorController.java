@@ -1,5 +1,6 @@
 package dev.joaorooliveira.catalogo_filmes.domain.diretor;
 
+import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorAtualizarDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorFiltroRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorResponseDTO;
@@ -41,7 +42,15 @@ public class DiretorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DiretorResponseDTO> buscar(@PathVariable Long id){
+    public ResponseEntity<DiretorResponseDTO> buscarPorId(@PathVariable Long id){
         return ResponseEntity.ok(diretorService.buscarDiretorPorId(id));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DiretorResponseDTO> atualizar(@PathVariable Long id, @RequestBody DiretorAtualizarDTO diretorAtualizarDTO){
+        return ResponseEntity.ok(diretorService.atualizarDiretor(id, diretorAtualizarDTO));
+    }
+
+
+
 }
