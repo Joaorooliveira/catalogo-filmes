@@ -6,7 +6,6 @@ import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.filme.dto.FilmeResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
