@@ -36,7 +36,12 @@ public class DiretorController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DiretorResponseDTO>> listar(@PageableDefault(size = 10) Pageable pageable, DiretorFiltroRequestDTO filtro){
+    public ResponseEntity<Page<DiretorResponseDTO>> buscar(@PageableDefault(size = 10) Pageable pageable, DiretorFiltroRequestDTO filtro){
         return ResponseEntity.ok(diretorService.buscarDiretores(pageable,filtro));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DiretorResponseDTO> buscar(@PathVariable Long id){
+        return ResponseEntity.ok(diretorService.buscarDiretorPorId(id));
     }
 }
