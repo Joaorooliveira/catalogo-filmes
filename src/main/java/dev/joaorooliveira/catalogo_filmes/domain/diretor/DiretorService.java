@@ -44,4 +44,11 @@ public class DiretorService {
         return DiretorResponseDTO.fromDiretor(diretor);
     }
 
+    @Transactional
+    public void deletarDiretor(Long id){
+        var diretor = diretorRepository.findById(id).orElseThrow(
+                ()-> new EntidadeNaoEncontradaException("Diretor nao encontrado"));
+        diretorRepository.delete(diretor);
+    }
+
 }
