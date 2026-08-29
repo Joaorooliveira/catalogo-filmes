@@ -51,6 +51,8 @@ public class DiretorController {
         return ResponseEntity.ok(diretorService.atualizarDiretor(id, diretorAtualizarDTO));
     }
 
-
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
+        return ResponseEntity.noContent().build();
+    }
 }
