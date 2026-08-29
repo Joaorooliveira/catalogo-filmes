@@ -3,6 +3,7 @@ package dev.joaorooliveira.catalogo_filmes.domain.diretor;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorFiltroRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorResponseDTO;
+import dev.joaorooliveira.catalogo_filmes.infra.exception.EntidadeNaoEncontradaException;
 import dev.joaorooliveira.catalogo_filmes.infra.specification.DiretorSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,5 +30,9 @@ public class DiretorService {
                 .map(DiretorResponseDTO::fromDiretor);
     }
 
+    public DiretorResponseDTO buscarDiretorPorId(Long id){
+        return DiretorResponseDTO.fromDiretor(diretorRepository.findById(id).orElseThrow(
+                ()-> new EntidadeNaoEncontradaException("Diretor nao encontrado")));
+    }
 
 }
