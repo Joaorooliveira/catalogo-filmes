@@ -1,5 +1,6 @@
 package dev.joaorooliveira.catalogo_filmes.domain.diretor;
 
+import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorAtualizarDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorFiltroRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorResponseDTO;
@@ -33,6 +34,14 @@ public class DiretorService {
     public DiretorResponseDTO buscarDiretorPorId(Long id){
         return DiretorResponseDTO.fromDiretor(diretorRepository.findById(id).orElseThrow(
                 ()-> new EntidadeNaoEncontradaException("Diretor nao encontrado")));
+    }
+
+    @Transactional
+    public DiretorResponseDTO atualizarDiretor(Long id, DiretorAtualizarDTO diretorAtualizarDTO){
+        var diretor = diretorRepository.findById(id).orElseThrow(
+                ()-> new EntidadeNaoEncontradaException("Diretor nao encontrado"));
+        diretorAtualizarDTO.preencher(diretor);
+        return DiretorResponseDTO.fromDiretor(diretor);
     }
 
 }
