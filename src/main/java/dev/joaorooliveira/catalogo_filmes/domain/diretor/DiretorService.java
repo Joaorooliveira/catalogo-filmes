@@ -3,6 +3,7 @@ package dev.joaorooliveira.catalogo_filmes.domain.diretor;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorFiltroRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.diretor.dto.DiretorResponseDTO;
+import dev.joaorooliveira.catalogo_filmes.infra.specification.DiretorSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,10 @@ public class DiretorService {
         return DiretorResponseDTO.fromDiretor(diretor);
     }
 
-    public Page<DiretorResponseDTO> listarDiretores(Pageable pageable, DiretorFiltroRequestDTO filtro) {}
+    public Page<DiretorResponseDTO> buscarDiretores(Pageable pageable, DiretorFiltroRequestDTO filtro) {
+        return diretorRepository.findAll(DiretorSpecification.comFiltros(filtro),pageable)
+                .map(DiretorResponseDTO::fromDiretor);
+    }
+
+
 }
