@@ -29,6 +29,14 @@ public class Lista {
     @Column(nullable = false, length = 255)
     private String titulo;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "lista_filme",
+            joinColumns = @JoinColumn(name = "lista_id"),
+            inverseJoinColumns = @JoinColumn(name = "filme_id")
+    )
+    private List<Filme> filmes = new ArrayList<>();
+
     @CreatedDate
     @Column(nullable = false, name = "criado_em")
     private LocalDateTime criadoEm;
@@ -37,11 +45,5 @@ public class Lista {
     @Column(nullable = false, name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "lista_filme",
-            joinColumns = @JoinColumn(name = "lista_id"),
-            inverseJoinColumns = @JoinColumn(name = "filme_id")
-    )
-    private List<Filme> filmes = new ArrayList<>();
+
 }
