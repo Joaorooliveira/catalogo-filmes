@@ -2,6 +2,7 @@ package dev.joaorooliveira.catalogo_filmes.domain.lista;
 
 import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaResponseDTO;
+import dev.joaorooliveira.catalogo_filmes.infra.exception.EntidadeNaoEncontradaException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,12 @@ public class ListaService {
     @Transactional
     public ListaResponseDTO salvarLista(ListaRequestDTO listaRequestDTO) {
         Lista lista = listaRepository.save(listaRequestDTO.toEntity());
+        return ListaResponseDTO.fromEntity(lista);
+    }
+
+    public ListaResponseDTO buscarListaPorId(Long id) {
+        Lista lista = listaRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Lista não encontrada com o ID: " + id));
         return ListaResponseDTO.fromEntity(lista);
     }
 
