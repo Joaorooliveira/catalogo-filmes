@@ -26,5 +26,11 @@ public class ListaService {
         return ListaResponseDTO.fromEntity(lista);
     }
 
+    @Transactional
+    public void deletarLista(Long id){
+        Lista lista = listaRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Lista não encontrada com o ID: " + id));
+        listaRepository.delete(lista);
+    }
 
 }
