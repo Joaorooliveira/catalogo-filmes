@@ -47,6 +47,15 @@ public class ListaService {
         listaRepository.delete(lista);
     }
 
+//    @Transactional
+//    public ListaResponseDTO atualizarLista(Long id, ListaRequestDTO listaRequestDTO) {
+//        Lista lista = listaRepository.findById(id)
+//                .orElseThrow(() -> new EntidadeNaoEncontradaException("Lista não encontrada com o ID: " + id));
+//        lista.setTitulo(listaRequestDTO.titulo());
+//        Lista listaAtualizada = listaRepository.save(lista);
+//        return ListaResponseDTO.fromEntity(listaAtualizada);
+//    }
+
 
 
 }
