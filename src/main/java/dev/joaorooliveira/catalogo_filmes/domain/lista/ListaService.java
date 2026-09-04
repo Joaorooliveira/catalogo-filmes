@@ -23,6 +23,14 @@ public class ListaService {
         return ListaResponseDTO.fromEntity(lista);
     }
 
+//    @Transactional
+//    public ListaResponseDTO adicionarFilmeNaLista(Long id, Long filmeId) {
+//        Lista lista = listaRepository.findById(id)
+//                .orElseThrow(() -> new EntidadeNaoEncontradaException("Lista não encontrada com o ID: " + listaId));
+//        lista.adicionarFilme(filmeId);
+//        return ListaResponseDTO.fromEntity(lista);
+//    }
+
     public Page<ListaResponseDTO> buscarListas(
             String titulo,
             Pageable pageable
@@ -48,15 +56,6 @@ public class ListaService {
         listaRepository.delete(lista);
     }
 
-//    @Transactional
-//    public ListaResponseDTO atualizarLista(Long id, ListaRequestDTO listaRequestDTO) {
-//        Lista lista = listaRepository.findById(id)
-//                .orElseThrow(() -> new EntidadeNaoEncontradaException("Lista não encontrada com o ID: " + id));
-//        lista.setTitulo(listaRequestDTO.titulo());
-//        Lista listaAtualizada = listaRepository.save(lista);
-//        return ListaResponseDTO.fromEntity(listaAtualizada);
-//    }
-
     @Transactional
     public ListaResponseDTO atualizarLista(Long id, ListaAtualizarDTO listaAtualizarDTO) {
         Lista lista = listaRepository.findById(id)
@@ -64,6 +63,8 @@ public class ListaService {
         listaAtualizarDTO.preencher(lista);
         return ListaResponseDTO.fromEntity(lista);
     }
+
+
 
 
 }
