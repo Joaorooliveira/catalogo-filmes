@@ -1,5 +1,6 @@
 package dev.joaorooliveira.catalogo_filmes.domain.lista;
 
+import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaAtualizarDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaResponseDTO;
 import dev.joaorooliveira.catalogo_filmes.infra.exception.EntidadeNaoEncontradaException;
@@ -56,6 +57,13 @@ public class ListaService {
 //        return ListaResponseDTO.fromEntity(listaAtualizada);
 //    }
 
+    @Transactional
+    public ListaResponseDTO atualizarLista(Long id, ListaAtualizarDTO listaAtualizarDTO) {
+        Lista lista = listaRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Lista não encontrada com o ID: " + id));
+        listaAtualizarDTO.preencher(lista);
+        return ListaResponseDTO.fromEntity(lista);
+    }
 
 
 }
