@@ -32,5 +32,12 @@ public class ListaController {
         return ResponseEntity.created(location).body(listaResponseDTO);
     }
 
+    @PostMapping("/{id}/filmes")
+    public ResponseEntity<ListaResponseDTO> adicionarFilmesNaLista(
+            @PathVariable Long id,
+            @RequestBody @Valid List<Long> filmes) {
+        ListaResponseDTO listaResponseDTO = listaService.adicionarFilmesNaLista(id, filmes);
+        return ResponseEntity.ok(listaResponseDTO);
+    }
 
 }
