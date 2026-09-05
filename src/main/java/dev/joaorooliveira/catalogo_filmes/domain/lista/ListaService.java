@@ -1,5 +1,7 @@
 package dev.joaorooliveira.catalogo_filmes.domain.lista;
 
+import dev.joaorooliveira.catalogo_filmes.domain.filme.Filme;
+import dev.joaorooliveira.catalogo_filmes.domain.filme.FilmeRepository;
 import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaAtualizarDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaResponseDTO;
@@ -9,12 +11,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ListaService {
     private final ListaRepository listaRepository;
+    private final FilmeRepository filmeRepository;
 
-    public ListaService(ListaRepository listaRepository) {
+    public ListaService(ListaRepository listaRepository, FilmeRepository filmeRepository) {
         this.listaRepository = listaRepository;
+        this.filmeRepository = filmeRepository;
     }
 
     @Transactional
@@ -23,13 +29,17 @@ public class ListaService {
         return ListaResponseDTO.fromEntity(lista);
     }
 
-//    @Transactional
-//    public ListaResponseDTO adicionarFilmeNaLista(Long id, Long filmeId) {
-//        Lista lista = listaRepository.findById(id)
-//                .orElseThrow(() -> new EntidadeNaoEncontradaException("Lista não encontrada com o ID: " + listaId));
-//        lista.adicionarFilme(filmeId);
-//        return ListaResponseDTO.fromEntity(lista);
-//    }
+    @Transactional
+    public ListaResponseDTO adicionarFilmesNaLista(Long id,List<Long> filmes){
+        Lista lista = listaRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Lista não encontrada com o ID: " + id));
+
+        lista.getFilmes().addAll(filmes.stream()
+                .map(filmeId -> filmeRepository.findById(filmeId)
+                        .orElseThrow(() -> new EntidadeNaoEncontradaException("Filme não encontrado com o ID: " + filmeId)))
+                .toList());
+        return ListaResponseDTO.fromEntity(lista);
+    }
 
     public Page<ListaResponseDTO> buscarListas(
             String titulo,

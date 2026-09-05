@@ -44,6 +44,4 @@ public class Lista {
     @LastModifiedDate
     @Column(nullable = false, name = "atualizado_em")
     private LocalDateTime atualizadoEm;
-
-
 }
