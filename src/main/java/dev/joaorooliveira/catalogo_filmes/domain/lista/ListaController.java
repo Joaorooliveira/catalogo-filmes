@@ -61,10 +61,19 @@ public class ListaController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/{id}/filmes")
+    public ResponseEntity<ListaResponseDTO> removerFilmesDaLista(
+            @PathVariable Long id,
+            @RequestBody List<Long> filmes) {
+        ListaResponseDTO listaResponseDTO = listaService.deletarFilmesDaLista(id, filmes);
+        return ResponseEntity.ok(listaResponseDTO);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<ListaResponseDTO> atualizar(@PathVariable Long id,
                                                       @RequestBody @Valid ListaAtualizarDTO listaAtualizarDTO) {
         ListaResponseDTO listaResponseDTO = listaService.atualizarLista(id, listaAtualizarDTO);
         return ResponseEntity.ok(listaResponseDTO);
     }
+
 }
