@@ -48,4 +48,9 @@ public class ListaController {
         return ResponseEntity.ok(listaResponseDTO);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ListaResponseDTO> buscarPorId(@PathVariable Long id) {
+        ListaResponseDTO listaResponseDTO = listaService.buscarListaPorId(id);
+        return ResponseEntity.ok(listaResponseDTO);
+    }
 }
