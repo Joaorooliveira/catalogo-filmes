@@ -53,4 +53,10 @@ public class ListaController {
         ListaResponseDTO listaResponseDTO = listaService.buscarListaPorId(id);
         return ResponseEntity.ok(listaResponseDTO);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        listaService.deletarLista(id);
+        return ResponseEntity.noContent().build();
+    }
 }
