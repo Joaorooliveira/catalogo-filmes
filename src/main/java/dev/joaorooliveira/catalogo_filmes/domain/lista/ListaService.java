@@ -67,6 +67,20 @@ public class ListaService {
     }
 
     @Transactional
+    public ListaResponseDTO deletarFilmesDaLista(Long id,List<Long> filmesId){
+        Lista lista = listaRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Lista não encontrada com o ID: " + id));
+
+        List<Filme> filmesParaRemover = filmesId.stream()
+                .map(filmeId -> filmeRepository.findById(filmeId)
+                        .orElseThrow(() -> new EntidadeNaoEncontradaException("Filme não encontrado com o ID: " + filmeId)))
+                .toList();
+
+        lista.getFilmes().removeAll(filmesParaRemover);
+        return ListaResponseDTO.fromEntity(lista);
+    }
+
+    @Transactional
     public ListaResponseDTO atualizarLista(Long id, ListaAtualizarDTO listaAtualizarDTO) {
         Lista lista = listaRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Lista não encontrada com o ID: " + id));
