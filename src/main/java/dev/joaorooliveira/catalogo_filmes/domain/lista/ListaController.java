@@ -3,6 +3,8 @@ package dev.joaorooliveira.catalogo_filmes.domain.lista;
 import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaResponseDTO;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -35,8 +37,14 @@ public class ListaController {
     @PostMapping("/{id}/filmes")
     public ResponseEntity<ListaResponseDTO> adicionarFilmesNaLista(
             @PathVariable Long id,
-            @RequestBody @Valid List<Long> filmes) {
+            @RequestBody List<Long> filmes) {
         ListaResponseDTO listaResponseDTO = listaService.adicionarFilmesNaLista(id, filmes);
+        return ResponseEntity.ok(listaResponseDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<ListaResponseDTO>> buscar(@RequestParam(required = false) String titulo, Pageable pageable) {
+        Page<ListaResponseDTO> listaResponseDTO = listaService.buscarListas(titulo,pageable);
         return ResponseEntity.ok(listaResponseDTO);
     }
 
