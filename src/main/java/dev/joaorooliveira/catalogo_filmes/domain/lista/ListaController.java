@@ -1,5 +1,6 @@
 package dev.joaorooliveira.catalogo_filmes.domain.lista;
 
+import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaAtualizarDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaRequestDTO;
 import dev.joaorooliveira.catalogo_filmes.domain.lista.dto.ListaResponseDTO;
 import jakarta.validation.Valid;
@@ -58,5 +59,12 @@ public class ListaController {
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         listaService.deletarLista(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ListaResponseDTO> atualizar(@PathVariable Long id,
+                                                      @RequestBody @Valid ListaAtualizarDTO listaAtualizarDTO) {
+        ListaResponseDTO listaResponseDTO = listaService.atualizarLista(id, listaAtualizarDTO);
+        return ResponseEntity.ok(listaResponseDTO);
     }
 }
